@@ -1,0 +1,24 @@
+<div class="form">
+    <p>Servicio impresion factura de venta</p>
+    <p style="display: flex">
+        <input type="radio" name="gender" value="male" checked="checked" (click)="tipoReporte(1)">&nbsp;&nbsp;Unitaria &nbsp;&nbsp; <br>
+        <input type="radio" name="gender" value="female" (click)="tipoReporte(2)">&nbsp;&nbsp;Lote<br>
+    </p>
+    
+    <form >
+        <div>
+            <label for="pre">Prefijo Factura:</label><br>
+            <input class="input" type="text" id="pre" />
+        </div>
+        <div>
+            <label for="inicial">Num. Factura Inicial:</label><br>
+            <input class="input" type="text" id="inicial" />
+        </div>
+        <div *ngIf="final">
+            <label for="final">Num. Factura final:</label><br>
+            <input class="input" type="text" id="final" />
+        </div>
+        
+        <input class="input" type="submit" value="Enviar" (click)="getData()">
+    </form>    
+</div>

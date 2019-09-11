@@ -1,0 +1,44 @@
+<div class="contenedor">
+    <h1><a href="http://marfilbsc.com/" target="_blank" rel="noopener noreferrer">marfil bsc tech</a></h1>
+   <div class="login">
+       <header>
+           <a href="http://marfilbsc.com/" target="_blank" rel="noopener noreferrer">
+            <img src="../assets/logo.jpg" alt="Marfil" title="marfilbsc.co" class="imglogo">
+           </a>            
+       </header>
+       <div class="conte-form">
+            <form (ngSubmit)="IniciarSesion(f)" #f="ngForm">
+       
+                <mat-form-field class="input">
+                <input type="text" matInput placeholder="Usuario" ngModel #usuario="ngModel" required minlength="1" name="usuario"  >
+                <i matSuffix class="material-icons">account_circle</i>
+                </mat-form-field>
+                        
+                <mat-form-field class="input">
+                <input type="password" matInput placeholder="Password"  ngModel #password="ngModel" required minlength="1"  name="password" >
+                <i matSuffix class="material-icons">lock</i>
+                </mat-form-field>  
+
+                <div class="contenedorMsj" >
+                    <div class="mensaje" *ngIf="usuario.touched && !usuario.valid">
+                        <div *ngIf="usuario.errors.minlength">minimo {{usuario.errors.minlength.requiredLength}} Caracteres</div>
+                        <div *ngIf="usuario.errors.required">Usuario es requerido</div>
+                    </div>
+                    <div class="mensaje" *ngIf="password.touched && !password.valid">
+                        <div *ngIf="password.errors.minlength">minimo {{password.errors.minlength.requiredLength}} Caracteres</div>
+                        <div *ngIf="password.errors.required">Favor ingresar contraseña</div>
+                    </div>
+                </div>
+        
+                <div class="button">
+                    <button type="submit" [disabled]="f.invalid" mat-flat-button color="primary">Ingresar</button>
+                </div>
+                
+            </form>
+           
+       </div>     
+       
+   </div>
+   
+</div>
+
