@@ -1,3 +1,3 @@
 
 
-export const url_api = "https://api-rest-integracion.herokuapp.com/api/v1/facturas/ventas/reportes/impresiones";
+export const url_api = "http://marfilbsc.co/api/v1/facturas/ventas/reportes/impresiones";

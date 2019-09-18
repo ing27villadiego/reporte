@@ -1,24 +1,43 @@
 <div class="form">
-    <p>Servicio impresion factura de venta</p>
-    <p style="display: flex">
-        <input type="radio" name="gender" value="male" checked="checked" (click)="tipoReporte(1)">&nbsp;&nbsp;Unitaria &nbsp;&nbsp; <br>
-        <input type="radio" name="gender" value="female" (click)="tipoReporte(2)">&nbsp;&nbsp;Lote<br>
-    </p>
-    
-    <form >
+    <div>
+            <p style="text-align: center; font-size:24px">Factura De Venta</p>    
+            <mat-slide-toggle [(ngModel)]="lote">Imprimir por lotes</mat-slide-toggle>
+    </div>
+ 
+    <form novalidate (ngSubmit)="getData(f)" #f="ngForm">
+        
         <div>
             <label for="pre">Prefijo Factura:</label><br>
-            <input class="input" type="text" id="pre" />
+            <input class="input" type="text" id="pre" ngModel #prefijo="ngModel" name="prefijo" required/>
         </div>
         <div>
             <label for="inicial">Num. Factura Inicial:</label><br>
-            <input class="input" type="text" id="inicial" />
+            <input class="input" type="text" id="inicial" ngModel #inicial="ngModel" name="inicial" required/>
         </div>
-        <div *ngIf="final">
+        <div *ngIf="lote">
             <label for="final">Num. Factura final:</label><br>
-            <input class="input" type="text" id="final" />
+            <input class="input" type="text" id="final" ngModel #final="ngModel" name="final" required/>
+            <div class="contenedorMsj" style="position: fixed; top:7px">
+                <div class="mensaje" *ngIf="final.touched && !final.valid">
+                    <div *ngIf="final.errors.minlength">minimo {{final.errors.minlength.requiredLength}} Caracteres</div>
+                    <div *ngIf="final.errors.required"> Num. final requerido</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="contenedorMsj" >
+            <div class="mensaje" *ngIf="prefijo.touched && !prefijo.valid">
+                <div *ngIf="prefijo.errors.minlength">minimo {{prefijo.errors.minlength.requiredLength}} Caracteres</div>
+                <div *ngIf="prefijo.errors.required">Prefijo es requerido</div>
+            </div>
+            <div class="mensaje" *ngIf="inicial.touched && !inicial.valid">
+                <div *ngIf="inicial.errors.minlength">minimo {{inicial.errors.minlength.requiredLength}} Caracteres</div>
+                <div *ngIf="inicial.errors.required"> Num. inicial requerido</div>
+            </div>
+         
         </div>
         
-        <input class="input" type="submit" value="Enviar" (click)="getData()">
-    </form>    
+        <input class="input" type="submit" value="Impresion De Facturas" >
+    </form>   
+  
 </div>

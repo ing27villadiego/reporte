@@ -2,10 +2,34 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { FacturaVentaComponent } from './factura-venta/factura-venta.component';
+import { Error404Component } from './error404/error404.component'
+import { SesionGuard } from './servicios/servicios.index'
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'factura', component: FacturaVentaComponent}
+  { 
+    path: '', 
+    component: FacturaVentaComponent,
+    canActivate: [SesionGuard],
+    children: [
+      {
+        path: 'facturas',
+        component: FacturaVentaComponent
+      },
+      {
+        path: '',
+        redirectTo: '/facturas', 
+        pathMatch: 'full'
+      }
+    ] 
+  },
+  {
+    path: 'sesion',
+    component: LoginComponent
+  },
+  {
+    path: '**',
+    component: Error404Component
+  }
 ]
 
 @NgModule({
@@ -13,8 +37,8 @@ const routes: Routes = [
     RouterModule.forRoot( 
       routes, 
       { 
-        useHash: true 
-      } )
+        useHash: true
+      },)
   ],
   exports: [
     RouterModule

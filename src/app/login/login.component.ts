@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { SessionService } from '../service/session.service';
+import { SessionService } from '../servicios/servicios.index'
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+
+// model de user
+import { Usuario } from '../modelos/usuario.model';
+
 
 @Component({
   selector: 'app-login',
@@ -12,17 +16,28 @@ export class LoginComponent implements OnInit {
   
   constructor(
     public router: Router,
-    private service: SessionService
+    private sesionService: SessionService
   ) { }
+  
 
   ngOnInit() {
   
   }
 
   IniciarSesion(form:NgForm) {
-    if (form.valid) {
-      this.router.navigate(['factura']);
+    if (form.invalid) {
+      return
     }
+    let usuario = {
+      "CODIGO_USUARIO": form.value.usuario,
+      "CLAVE_ACCESO": form.value.password,
+      "CODIGO_EMPRESA": "7",
+      "COMPANY": "clickoffice_desarrollo"
+    }
+      
+    this.sesionService.iniciarSesion(usuario).subscribe(login => {
+      this.router.navigate(['/facturas'])
+    })
   }
     
  
